@@ -1,6 +1,8 @@
 package com.beginningandroid.Services;
 
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -44,7 +46,7 @@ public class ServicesActivity extends BaseActivity {
         btnAsyncTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new MyAsyncTask(ServicesActivity.this).execute();
             }
         });
     }
@@ -72,8 +74,6 @@ public class ServicesActivity extends BaseActivity {
         }
     };
 
-
-
     private void doInThread() {
         Thread t = new Thread(new MyRunnable());
         t.start();
@@ -96,25 +96,50 @@ public class ServicesActivity extends BaseActivity {
 
     class MyAsyncTask extends AsyncTask<Void, Integer, Boolean>{
 
+        Context context;
+
+        ProgressDialog progressDialog;
+
+        public MyAsyncTask(Context context){
+            this.context = context;
+
+        }
+
         @Override
         protected Boolean doInBackground(Void... params) {
-            return null;
+            try {
+                int idx = 0;
+                while (true) {
+                    if (100 == idx) break;
+                    publishProgress(idx);
+                    idx++;
+                    Thread.sleep(100);
+                }
+                return true;
+            } catch (Exception ex) {
+            }
+            return false;
         }
 
         @Override
         protected void onPreExecute() {
-
-            //super.onPreExecute();
+            progressDialog =  new ProgressDialog(context);
+            progressDialog.setTitle("");
+            progressDialog.setMessage("请稍等...");
+            progressDialog.show();
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
+            progressDialog.setMessage(String.valueOf(values[0]) + "% done");
         }
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
+            progressDialog.dismiss();
+            if (aBoolean){
+                Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

@@ -21,12 +21,19 @@
             android:label="@string/title_activity_base" >
         </activity>
         <activity
-            android:name=".Activities.MainActivity"
-            android:label="@string/title_activity_main" >
-        </activity>
-        <activity
             android:name=".Activities.HandlerActivity"
             android:label="@string/title_activity_handler" >
+        </activity>
+        <activity
+            android:name=".Broadcasts.BroadcastActivity"
+            android:label="BroadcastActivity">
+        </activity>
+        <activity android:name=".Broadcasts.LoginActivity"
+            android:label="LoginActivity">
+        </activity>
+        <activity
+            android:name=".Services.ServicesActivity"
+            android:label="ServicesActivity">
         </activity>
     </application>
 
