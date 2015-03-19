@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="testinone.Data.FilePersistentActivity">
+    tools:context="com.beginningandroid.Data.FilePersistentActivity">
 
     <EditText
         android:id="@+id/etPersistent"
