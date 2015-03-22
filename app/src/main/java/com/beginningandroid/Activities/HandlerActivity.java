@@ -1,5 +1,6 @@
 package com.beginningandroid.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 import com.beginningandroid.R;
 
-public class HandlerActivity extends ActionBarActivity {
+public class HandlerActivity extends BaseActivity {
 
     private Handler uiHandler = new Handler(new Handler.Callback() {
         @Override
@@ -36,7 +37,6 @@ public class HandlerActivity extends ActionBarActivity {
     private TextView tvHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handler);
 
@@ -143,28 +143,13 @@ public class HandlerActivity extends ActionBarActivity {
         });
     }
 
+    public void handler2(View view){
+        Intent intent = new Intent(HandlerActivity.this, Handler2Activity.class);
+        startActivity(intent);
+    }
+
      Handler handler;
      Handler threadHandler;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_handler, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

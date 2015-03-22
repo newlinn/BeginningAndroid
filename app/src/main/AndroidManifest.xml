@@ -26,14 +26,26 @@
         </activity>
         <activity
             android:name=".Broadcasts.BroadcastActivity"
-            android:label="BroadcastActivity">
+            android:label="BroadcastActivity" >
         </activity>
-        <activity android:name=".Broadcasts.LoginActivity"
-            android:label="LoginActivity">
+        <activity
+            android:name=".Broadcasts.LoginActivity"
+            android:label="LoginActivity" >
         </activity>
         <activity
             android:name=".Services.ServicesActivity"
-            android:label="ServicesActivity">
+            android:label="ServicesActivity" >
+        </activity>
+        <activity
+            android:name=".Activities.LayoutActivity"
+            android:label="LayoutActivity" >
+        </activity>
+        <activity
+            android:name=".Activities.ListViewActivity"
+            android:label="ListViewActivity" />
+        <activity
+            android:name=".Activities.Handler2Activity"
+            android:label="@string/title_activity_handler2" >
         </activity>
     </application>
 

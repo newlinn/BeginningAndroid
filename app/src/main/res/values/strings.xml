@@ -17,6 +17,7 @@
     <string name="title_activity_file_persistent">FilePersistentActivity</string>
     <string name="title_activity_sqlite">SQLiteActivity</string>
     <string name="title_activity_services">ServicesActivity</string>
+    <string name="title_activity_handler2">Handler2Activity</string>
 
 
 </resources>
