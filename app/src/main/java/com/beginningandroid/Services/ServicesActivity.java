@@ -2,9 +2,14 @@ package com.beginningandroid.Services;
 
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
+import android.os.Binder;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +18,7 @@ import android.widget.Toast;
 
 import com.beginningandroid.Activities.BaseActivity;
 
+import com.beginningandroid.MyApplication;
 import com.beginningandroid.R;
 
 public class ServicesActivity extends BaseActivity {
@@ -22,7 +28,7 @@ public class ServicesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
 
-        btnSendMsg = (Button)findViewById(R.id.btnSendMsg);
+        btnSendMsg = (Button) findViewById(R.id.btnSendMsg);
         btnSendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +48,7 @@ public class ServicesActivity extends BaseActivity {
             }
         });
 
-        btnAsyncTask = (Button)findViewById(R.id.btnAsyncTask);
+        btnAsyncTask = (Button) findViewById(R.id.btnAsyncTask);
         btnAsyncTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +66,7 @@ public class ServicesActivity extends BaseActivity {
     static final int SEND_MESSAGE = 1001;
     Button btnSendMsg;
 
-    private Handler msgHandler = new Handler(){
+    private Handler msgHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -94,13 +100,13 @@ public class ServicesActivity extends BaseActivity {
         }
     }
 
-    class MyAsyncTask extends AsyncTask<Void, Integer, Boolean>{
+    class MyAsyncTask extends AsyncTask<Void, Integer, Boolean> {
 
         Context context;
 
         ProgressDialog progressDialog;
 
-        public MyAsyncTask(Context context){
+        public MyAsyncTask(Context context) {
             this.context = context;
 
         }
@@ -123,7 +129,7 @@ public class ServicesActivity extends BaseActivity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog =  new ProgressDialog(context);
+            progressDialog = new ProgressDialog(context);
             progressDialog.setTitle("");
             progressDialog.setMessage("请稍等...");
             progressDialog.show();
@@ -137,9 +143,58 @@ public class ServicesActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             progressDialog.dismiss();
-            if (aBoolean){
+            if (aBoolean) {
                 Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
             }
         }
+
+    }
+
+    //// service
+    public void StartService(View view) {
+        Intent intent = new Intent(ServicesActivity.this, MyService.class);
+        startService(intent);
+    }
+
+    public void StopService(View view) {
+        Intent intent = new Intent(ServicesActivity.this, MyService.class);
+        stopService(intent);
+    }
+
+
+    MyService.BindInService bindInService;
+
+    class MyServiceConn implements ServiceConnection {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            bindInService = (MyService.BindInService) service;
+            bindInService.doIt();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    }
+
+    private MyServiceConn myServiceConn = new MyServiceConn();
+
+    public void btnBindService(View view) {
+        Intent service = new Intent(ServicesActivity.this, MyService.class);
+        myServiceConn = new MyServiceConn();
+        int flags = BIND_AUTO_CREATE;
+        bindService(service, myServiceConn, flags);
+    }
+
+    public void btnUnBindService(View view) {
+        unbindService(myServiceConn);
+    }
+
+    //// service end
+
+    public void btnIntentService(View view) {
+        Intent intent = new Intent(ServicesActivity.this, MyIntentService.class);
+        startService(intent);
     }
 }

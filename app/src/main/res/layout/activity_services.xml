@@ -20,5 +20,38 @@
         android:layout_height="wrap_content"
         android:text="Async Task"/>
 
+    <Button
+        android:id="@+id/btnStartService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Service"
+        android:onClick="StartService"/>
+
+    <Button
+        android:id="@+id/btnStopService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Service"
+        android:onClick="StopService"/>
+
+    <Button
+        android:id="@+id/btnBindService"
+        android:text="Bind Service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnBindService"/>
+    <Button
+        android:id="@+id/btnUnBindService"
+        android:text="UnBindService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnUnBindService"/>
+
+    <Button
+        android:id="@+id/btnIntentService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IntentService"
+        android:onClick="btnIntentService"/>
 
 </LinearLayout>
